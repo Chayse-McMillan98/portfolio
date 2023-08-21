@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'PermanentMarker';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/PermanentMarker-Regular.ttf')
+}
+
+.PermanentMarkerFont {
+    font-family: PermanentMarker;
+    color: white;
+    font-size: 40px;
+}
+
+
+
+@font-face {
+    font-family: 'MontserratBold';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Bold.ttf')
+}
+
+.MontserratBoldFont {
+    font-family: MontserratBold;
+}
+
+
+@font-face {
+    font-family: 'ReadyP2';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/PressStart2P-Regular.ttf')
+}
+
+.ReadyP2Font {
+    font-family: ReadyP2;
+}
