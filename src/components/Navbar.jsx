@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
+import { AiOutlineHome, AiOutlineCoffee, AiOutlineCodeSandbox, AiOutlineUser, AiOutlineMail } from 'react-icons/ai';
 import '../assets/css/fonts.css';
 
 const Navbar = () => {
@@ -16,8 +17,19 @@ const Navbar = () => {
         if(nav) {
             mobileNavButton.current.blur(); // removing focus
             setNavMobileTransitionState('h-0 opacity-0');
+
+            // Closing Nav
+            if(window.scrollY > 0) {
+                setMobileNavStyle('bg-white');
+                setMobileNavScrollStyle('bg-black');
+            } else {
+                setMobileNavStyle('bg-transparent');
+                setMobileNavScrollStyle('bg-white');
+            }
         } else {
             setNavMobileTransitionState('h-screen opacity-100');
+            setMobileNavStyle('bg-black');
+            setMobileNavScrollStyle('bg-white');
         }
 
         // Toggle Nav
@@ -29,6 +41,8 @@ const Navbar = () => {
     const [navBarStyle, setNavBarStyle] = useState(0);
     const [navBarTextStyle, setNavBarTextStyle] = useState('text-white');
     const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-white');
+
+    const [mobileNavStyle, setMobileNavStyle] = useState('bg-transparent');
     const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-white');
     useEffect(() => {
         const handleScroll = (event) => {
@@ -36,11 +50,15 @@ const Navbar = () => {
                 setNavBarStyle('bg-white');
                 setNavBarTextStyle('text-black');
                 setNavBarHoverStyle('from-black');
+
+                setMobileNavStyle('bg-white');
                 setMobileNavScrollStyle('bg-black');
             } else {
                 setNavBarStyle('bg-transparent');
                 setNavBarTextStyle('text-white');
                 setNavBarHoverStyle('from-white');
+
+                setMobileNavStyle('bg-transparent');
                 setMobileNavScrollStyle('bg-white');
             }
         };
@@ -74,7 +92,7 @@ const Navbar = () => {
             <div className='md:hidden block'>
                 <div className='fixed top-4 right-4 z-[99]'>
                     <button className='relative group' onClick={handleNav} ref={mobileNavButton}>
-                        <div className={navBarStyle+' relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md'}>
+                        <div className={mobileNavStyle+' relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md'}>
                             <div className='flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden'>
 
                                 {/* Button Default
@@ -88,9 +106,9 @@ const Navbar = () => {
                                 </div>
                                 */}
 
-                                <div className={`${genericHamburgerLine} ${ nav ? "bg-black w-9 rotate-45 translate-y-3 -translate-x-1" : mobileNavScrollStyle+" w-5" }`}/>
+                                <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-9 rotate-45 translate-y-3 -translate-x-1" : mobileNavScrollStyle+" w-5" }`}/>
                                 <div className={`${genericHamburgerLine} ${nav ? "opacity-0" : mobileNavScrollStyle+" w-5" }`} />
-                                <div className={`${genericHamburgerLine} ${ nav ? "bg-black w-12 -rotate-45 -translate-y-3 -translate-x-3" : mobileNavScrollStyle+" w-5" }`} />
+                                <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-12 -rotate-45 -translate-y-3 -translate-x-3" : mobileNavScrollStyle+" w-5" }`} />
                                 
                             </div>
                         </div>
@@ -99,28 +117,38 @@ const Navbar = () => {
 
                 {/* Mobile Nav Items */}
                 <div className={'fixed w-screen duration-700 bg-white z-[98] '+navMobileTransitionState}>
-                    <div className='relative'>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
-                        <div>Test-1 Test-1 Test-1</div>
+
+                <div className='pt-8'>
+                    <h2 className='PermanentMarkerFont ml-10 text-4xl text-black'>Chayse</h2>
+                    <h2 className='PermanentMarkerFont ml-20 text-3xl text-black'>McMillan</h2>
+                </div>
+
+
+                    {/* Mobile Nav Items*/}
+                    <div className='w-full bg-white/90 flex flex-col justify-center items-center' style={{ height: '70%'}}>
+                        <a href='#main' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
+                            <AiOutlineHome className='text-white' size={20}/>
+                            <span className='MontserratBoldFont text-white pl-4'>Home</span>
+                        </a>
+                        <a href='#work' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
+                            <AiOutlineCoffee className='text-white' size={20}/>
+                            <span className='MontserratBoldFont text-white pl-4'>Work</span>
+                        </a>
+                        <a href='#projects' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
+                            <AiOutlineCodeSandbox className='text-white' size={20}/>
+                            <span className='MontserratBoldFont text-white pl-4'>Projects</span>
+                        </a>
+                        <a href='#resume' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
+                            <AiOutlineUser className='text-white' size={20}/>
+                            <span className='MontserratBoldFont text-white pl-4'>Resume</span>
+                        </a>
+                        <a href='#contact' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
+                            <AiOutlineMail className='text-white' size={20}/>
+                            <span className='MontserratBoldFont text-white pl-4'>Contact</span>
+                        </a>
                     </div>
                 </div>
             </div>
-
-
-
-
 
             {/* Navbar Menu (Large Screen) */}
             <div className='md:block hidden'>
