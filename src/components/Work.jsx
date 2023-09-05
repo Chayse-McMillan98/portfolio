@@ -19,7 +19,7 @@ const data = [
     },
     {
         startYear: '2021',
-        endYear: 'present',
+        endYear: 'Present',
         companyName: '1440',
         companyLink: 'https://www.1440.io/',
         title: 'Software Engineer',
@@ -31,8 +31,25 @@ const data = [
 
 const Work = () => {
     return (
-        <div id='work' className='bg-white m-auto md:pl-20 p-4'>
-            <h2 className='PermanentMarkerFont py-10 text-black text-center md:ml-60 ml-10 md:text-7xl text-5xl'>Work</h2>
+        <div id='work' className='bg-white'>
+            <div className='flex justify-center w-full'>
+                <div className="py-10">
+                    <h2 className='MontserratBoldFont text-center text-black md:text-7xl text-5xl'>Work</h2>
+
+                    { /* Large Device Underline */}
+                    <div className='md:flex hidden' >
+                        <div className='bg-gradient-to-l from-black' style={{height: '2px', width: '200px'}}></div>
+                        <div className='bg-gradient-to-r from-black' style={{height: '2px', width: '200px'}}></div>
+                    </div>
+
+                    { /* Small Device Underline */}
+                    <div className='md:hidden flex' >
+                        <div className='bg-gradient-to-l from-black' style={{height: '2px', width: '100px'}}></div>
+                        <div className='bg-gradient-to-r from-black' style={{height: '2px', width: '100px'}}></div>
+                    </div>
+                </div>
+            </div>
+            
             {data.map((item, idx)=> (
                 <WorkItem
                     key={idx} 

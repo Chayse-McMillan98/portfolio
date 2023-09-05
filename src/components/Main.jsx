@@ -1,6 +1,6 @@
 import React from 'react'
 import { TypeAnimation } from 'react-type-animation';
-import backgroundImg from '../assets/images/background.jpg';
+import backgroundImg from '../assets/images/unsplash2.jpg';
 import '../assets/css/fonts.css';
 
 const Main = () => {
@@ -10,10 +10,10 @@ const Main = () => {
 
         <div className='relative w-full h-screen'>
           <img className='absolute w-full h-screen object-cover' src={backgroundImg} alt="logo" />
-          <div className='absolute w-full h-1/3 bg-gradient-to-t from-white to-transparent' style={{bottom:0}}></div>
+          <div className='absolute w-full h-1/4 bg-gradient-to-t from-white to-transparent' style={{bottom:0}}></div>
         </div>
 
-        <div className='absolute top-20 z-[1]'>
+        <div className='absolute md:top-20 top-10 z-[1]'>
           <h2 className='PermanentMarkerFont md:ml-60 ml-10 md:text-7xl text-6xl'>Chayse</h2>
           <h2 className='PermanentMarkerFont md:ml-80 ml-20 md:text-7xl text-5xl'>McMillan</h2>
           
