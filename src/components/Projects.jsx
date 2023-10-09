@@ -1,28 +1,29 @@
-import React from 'react'
+import React from 'react';
+import Title from './Title';
+import backgroundImg from '../assets/images/little_dell.jpg';
 
 const Projects = () => {
   return (
-    <div id='projects' className='bg-white'>
-            <div className='flex justify-center w-full'>
-                <div className="py-10">
-                    <h2 className='MontserratBoldFont text-center text-black md:text-7xl text-5xl py-2'>Projects</h2>
+    <div id='projects' className='bg-white relative'>
 
-                    { /* Large Device Underline */}
-                    <div className='md:flex hidden' >
-                        <div className='bg-gradient-to-l from-black' style={{height: '2px', width: '240px'}}></div>
-                        <div className='bg-gradient-to-r from-black' style={{height: '2px', width: '240px'}}></div>
-                    </div>
-
-                    { /* Small Device Underline */}
-                    <div className='md:hidden flex' >
-                        <div className='bg-gradient-to-l from-black' style={{height: '2px', width: '140px'}}></div>
-                        <div className='bg-gradient-to-r from-black' style={{height: '2px', width: '140px'}}></div>
-                    </div>
-                </div>
-            </div>
-
-            { /* Project Items */}            
+        { /* Background Img */}
+        <div className='absolute w-full h-full'>
+            <img className='absolute w-full h-full object-cover' src={backgroundImg} alt="logo" />
+            <div className='absolute w-full h-1/6 bg-gradient-to-b from-[#969696] to-transparent' style={{ top:0 }}></div>
+            <div className='absolute w-full h-1/6 bg-gradient-to-t from-[#5C5C5C] to-transparent' style={{ bottom:0 }}></div>
         </div>
+
+        { /* Section Title */}
+        <Title
+            text='Projects'
+            largeDeviceUnderline='240px'
+            smallDeviceUnderline='140px'
+        ></Title>
+
+        { /* Project Items https://www.youtube.com/watch?v=22CxRxryQFE */}
+        <div className='h-screen'>
+        </div>     
+    </div>
   )
 }
 

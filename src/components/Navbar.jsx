@@ -22,9 +22,11 @@ const Navbar = () => {
             if(window.scrollY > 0) {
                 setMobileNavStyle('bg-white');
                 setMobileNavScrollStyle('bg-black');
+
             } else {
                 setMobileNavStyle('bg-transparent');
-                setMobileNavScrollStyle('bg-white');
+                //setMobileNavScrollStyle('bg-white');
+                setMobileNavScrollStyle('bg-black');
             }
         } else {
             setNavMobileTransitionState('h-screen opacity-100');
@@ -39,11 +41,14 @@ const Navbar = () => {
 
     // Navbar Scroll State (Large)
     const [navBarStyle, setNavBarStyle] = useState(0);
-    const [navBarTextStyle, setNavBarTextStyle] = useState('text-white');
-    const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-white');
+    //const [navBarTextStyle, setNavBarTextStyle] = useState('text-white');
+    //const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-white');
+    const [navBarTextStyle, setNavBarTextStyle] = useState('text-black');
+    const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-black');
 
     const [mobileNavStyle, setMobileNavStyle] = useState('bg-transparent');
-    const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-white');
+    //const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-white');
+    const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-black');
     useEffect(() => {
         const handleScroll = (event) => {
             if(window.scrollY > 0) {
@@ -55,11 +60,14 @@ const Navbar = () => {
                 setMobileNavScrollStyle('bg-black');
             } else {
                 setNavBarStyle('bg-transparent');
-                setNavBarTextStyle('text-white');
-                setNavBarHoverStyle('from-white');
+                //setNavBarTextStyle('text-white');
+                //setNavBarHoverStyle('from-white');
+                setNavBarTextStyle('text-black');
+                setNavBarHoverStyle('from-black');
 
                 setMobileNavStyle('bg-transparent');
-                setMobileNavScrollStyle('bg-white');
+                //setMobileNavScrollStyle('bg-white');
+                setMobileNavScrollStyle('bg-black');
             }
         };
         window.addEventListener('scroll', handleScroll);
@@ -118,14 +126,14 @@ const Navbar = () => {
                 {/* Mobile Nav Items */}
                 <div className={'fixed w-screen duration-700 bg-white z-[98] '+navMobileTransitionState}>
 
-                <div className='pt-8'>
-                    <h2 className='PermanentMarkerFont ml-10 text-4xl text-black'>Chayse</h2>
-                    <h2 className='PermanentMarkerFont ml-20 text-3xl text-black'>McMillan</h2>
-                </div>
+                    <div className='pt-8'>
+                        <h2 className='PermanentMarkerFont ml-10 text-4xl text-black'>Chayse</h2>
+                        <h2 className='PermanentMarkerFont ml-20 text-3xl text-black'>McMillan</h2>
+                    </div>
 
 
                     {/* Mobile Nav Items*/}
-                    <div className='w-full bg-white/90 flex flex-col justify-center items-center' style={{ height: '70%'}}>
+                    <div className='w-full bg-white/90 flex flex-col justify-center items-center' style={{ height: '70%' }}>
                         <a href='#main' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
                             <AiOutlineHome className='text-white' size={20}/>
                             <span className='MontserratBoldFont text-white pl-4'>Home</span>

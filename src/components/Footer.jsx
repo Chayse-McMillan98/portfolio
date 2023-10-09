@@ -6,10 +6,10 @@ import tailwindLogo from '../assets/images/tailwind.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-black">
+    <footer className="bg-white">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
             <div className="flex items-center">
-                <p className="text-white MontserratRegularFont">Built By Me, Powered By:</p>
+                <p className="text-black MontserratRegularFont">Built By Me, Powered By:</p>
                 <div className="flex w-48">
                     <img className='object-contain h-8' style={{width: '50px'}} src={viteLogo} alt="logo" />
                     <img className='object-contain h-8' style={{width: '50px'}} src={reactLogo} alt="logo" />
