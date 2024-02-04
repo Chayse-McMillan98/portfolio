@@ -1,3 +1,3 @@
-Demo Commands:
+Commands:
     - `npm run dev -- --host`
-    - `npm `
+    - `npm run build`
