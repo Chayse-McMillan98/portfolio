@@ -7,6 +7,7 @@ import tailwindLogo from '../assets/images/tailwind.png';
 const Footer = () => {
   return (
     <footer className="bg-white">
+       {/*
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
             <div className="flex items-center">
                 <p className="text-black MontserratRegularFont">Built By Me, Powered By:</p>
@@ -16,13 +17,8 @@ const Footer = () => {
                     <img className='object-contain h-8' style={{width: '70px'}} src={tailwindLogo} alt="logo" />
                 </div>
             </div>
-
-
-
-
-
-
         </div>
+      */}
     </footer>
   )
 }

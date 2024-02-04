@@ -1,6 +1,37 @@
 import React from 'react';
 import Title from './Title';
 import backgroundImg from '../assets/images/little_dell.jpg';
+import ProjectItem from './ProjectItem';
+
+
+// Project Images (1900 x 1100)
+import portfolioImg from '../assets/images/portfolio.png';
+
+// Language Refs
+import { SiVite, SiTailwindcss } from "react-icons/si";
+import { FaReact } from "react-icons/fa6";
+
+const data = [
+  {
+    name: 'Portfolio Website',
+    projectLink: 'https://github.com/Chayse-McMillan98/portfolio',
+    bannerImg: portfolioImg,
+    languages: [
+      {
+        language: 'React',
+        icon: FaReact
+      },
+      {
+        language: 'Tailwind',
+        icon: SiTailwindcss
+      },
+      {
+        language: 'Vite',
+        icon: SiVite
+      }
+    ]
+  }
+];
 
 const Projects = () => {
   return (
@@ -20,9 +51,21 @@ const Projects = () => {
             smallDeviceUnderline='140px'
         ></Title>
 
-        { /* Project Items https://www.youtube.com/watch?v=22CxRxryQFE */}
+        { /* Project Items */}
+        {data.map((item, idx)=> (
+            <ProjectItem
+                key={idx}
+                name={item.name}
+                projectLink={item.projectLink}
+                bannerImg={item.bannerImg}
+                languages={item.languages} 
+            />
+        ))}
+
+        { /* Project Items https://www.youtube.com/watch?v=22CxRxryQFE
         <div className='h-screen'>
-        </div>     
+        </div>
+         */}  
     </div>
   )
 }
