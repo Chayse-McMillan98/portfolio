@@ -9,14 +9,14 @@ const Navbar = () => {
 
     // Mobile Nav Transition Animation
     const genericHamburgerLine = 'h-[2px] transition ease transform duration-300 ';
-    const [navMobileTransitionState, setNavMobileTransitionState] = useState('h-0 opacity-0');
+    const [navMobileTransitionState, setNavMobileTransitionState] = useState('h-0 opacity-0 -z-50');
 
     // Mobile Nav State Changes
     const [nav, setNav] = useState(false);
     const handleNav = () => {
         if(nav) {
             mobileNavButton.current.blur(); // removing focus
-            setNavMobileTransitionState('h-0 opacity-0');
+            setNavMobileTransitionState('h-0 opacity-0 -z-50');
 
             // Closing Nav
             if(window.scrollY > 0) {
@@ -25,7 +25,6 @@ const Navbar = () => {
 
             } else {
                 setMobileNavStyle('bg-transparent');
-                //setMobileNavScrollStyle('bg-white');
                 setMobileNavScrollStyle('bg-black');
             }
         } else {
@@ -41,13 +40,10 @@ const Navbar = () => {
 
     // Navbar Scroll State (Large)
     const [navBarStyle, setNavBarStyle] = useState(0);
-    //const [navBarTextStyle, setNavBarTextStyle] = useState('text-white');
-    //const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-white');
     const [navBarTextStyle, setNavBarTextStyle] = useState('text-black');
     const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-black');
 
     const [mobileNavStyle, setMobileNavStyle] = useState('bg-transparent');
-    //const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-white');
     const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-black');
     useEffect(() => {
         const handleScroll = (event) => {
@@ -60,13 +56,10 @@ const Navbar = () => {
                 setMobileNavScrollStyle('bg-black');
             } else {
                 setNavBarStyle('bg-transparent');
-                //setNavBarTextStyle('text-white');
-                //setNavBarHoverStyle('from-white');
                 setNavBarTextStyle('text-black');
                 setNavBarHoverStyle('from-black');
 
                 setMobileNavStyle('bg-transparent');
-                //setMobileNavScrollStyle('bg-white');
                 setMobileNavScrollStyle('bg-black');
             }
         };
@@ -102,22 +95,11 @@ const Navbar = () => {
                     <button className='relative group' onClick={handleNav} ref={mobileNavButton}>
                         <div className={mobileNavStyle+' relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md'}>
                             <div className='flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden'>
-
-                                {/* Button Default
-                                <div className={navMobileClickStateColor+' h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-x-10'}></div>
-                                <div className={navMobileClickStateColor+' h-[2px] w-7 rounded transform transition-all duration-300 group-focus:translate-x-10 delay-75'}></div>
-                                <div className={navMobileClickStateColor+' h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-x-10 delay-150'}></div>
-
-                                <div className='absolute items-center justify-between transform transition-all duration-500 top-2.5 -translate-x-10 group-focus:translate-x-0 flex w-0 group-focus:w-12'>
-                                    <div className={navMobileClickStateColor+' absolute h-[2px] w-5 transform transition-all duration-500 rotate-0 delay-300 group-focus:rotate-45'}></div>
-                                    <div className={navMobileClickStateColor+' absolute h-[2px] w-5 transform transition-all duration-500 -rotate-0 delay-300 group-focus:-rotate-45'}></div>
-                                </div>
-                                */}
-
+                                
                                 <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-9 rotate-45 translate-y-3 -translate-x-1" : mobileNavScrollStyle+" w-5" }`}/>
                                 <div className={`${genericHamburgerLine} ${nav ? "opacity-0" : mobileNavScrollStyle+" w-5" }`} />
                                 <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-12 -rotate-45 -translate-y-3 -translate-x-3" : mobileNavScrollStyle+" w-5" }`} />
-                                
+                        
                             </div>
                         </div>
                     </button>
@@ -125,12 +107,10 @@ const Navbar = () => {
 
                 {/* Mobile Nav Items */}
                 <div className={'fixed w-screen duration-700 bg-white z-[98] '+navMobileTransitionState}>
-
                     <div className='pt-8'>
                         <h2 className='PermanentMarkerFont ml-10 text-4xl text-black'>Chayse</h2>
                         <h2 className='PermanentMarkerFont ml-20 text-3xl text-black'>McMillan</h2>
                     </div>
-
 
                     {/* Mobile Nav Items*/}
                     <div className='w-full bg-white/90 flex flex-col justify-center items-center' style={{ height: '70%' }}>
