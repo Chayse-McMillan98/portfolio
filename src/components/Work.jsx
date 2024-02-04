@@ -6,7 +6,7 @@ import kilnPC from '../assets/images/kilnPC.jpeg';
 import clickAndCollect from '../assets/images/clickAndCollect.png';
 import '../assets/css/fonts.css';
 
-// Work Images
+// Work Images (1425 x 950)
 import dakcsImg from '../assets/images/dakcs.png';
 import io1440Img from '../assets/images/io1440.png';
 

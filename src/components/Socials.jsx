@@ -23,7 +23,7 @@ const Socials = () => {
     return (
       <div id='socials'>
         <div className='flex'>
-            <FaLinkedin size={60} style={{paddingRight: '20px', cursor: 'pointer', marginLeft: '15px'}} onClick={openLinkedIn}/>
+            <FaLinkedin size={60} style={{paddingRight: '20px', cursor: 'pointer', marginLeft: '25px'}} onClick={openLinkedIn}/>
             <FaGithub size={60} style={{paddingRight: '20px', cursor: 'pointer'}} onClick={openGithub}/>
             <FaInstagramSquare size={60} style={{paddingRight: '20px', cursor: 'pointer'}} onClick={openInstagram}/>
             <img src={trailhead} style={{height: '70px', objectFit: 'cover', marginTop: '-4px', marginLeft: '-15px', cursor: 'pointer'}} onClick={openTrailhead}/>
