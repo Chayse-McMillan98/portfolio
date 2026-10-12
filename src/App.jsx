@@ -6,7 +6,6 @@ import Work from './components/Work';
 import Projects from './components/Projects';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
 
 // Ease-out: fast start, long gentle deceleration into the target
 const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
@@ -35,7 +34,6 @@ function App() {
         <Projects/>
         <Resume/>
         <Contact/>
-        <Footer/>
       </div>
     </>
   )
