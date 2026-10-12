@@ -1,62 +1,63 @@
-import React, {useState} from 'react'
-import {  AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
-import '../assets/css/fonts.css';
+import React from 'react'
+import { FiGlobe, FiMapPin } from 'react-icons/fi';
+import { Chip, Tag, glass } from './ui';
 
-const WorkItem = ({ startYear, endYear, companyName, companyLink, title, details, logo, bannerImg }) => {
+const domain = (href) => href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
-    // Read More Handlers
-    const [readMore, setReadMore] = useState(false);
-    const [readMoreButtonText, setReadMoreButtonsText] = useState('Show More');
-    const [readMoreDivStyle, setReadMoreDivStyle] = useState('100px');
-    const handleReadMoreClick = () => {
-        setReadMore(!readMore);
-        if(readMore) {
-            setReadMoreButtonsText('Show More');
-            setReadMoreDivStyle('100px');
-        } else {
-            setReadMoreButtonsText('Show Less');
-            setReadMoreDivStyle('100%');
-        }
-    };
-
-    // Opens the Company Link
-    const openCompanyLink = () => {
-        window.open(companyLink, "_blank");
-    }
-
+const WorkItem = ({ job, logo, banner, bannerPosition = 'center' }) => {
     return (
-        <div className="justify-center flex px-8">
-            <div className="relative max-w-6xl mb-8 bg-white rounded-lg dark:bg-gray-800 dark:border-gray-700">
+        <article className={'flex h-full flex-col overflow-hidden ' + glass}>
 
-                {/* Top Image Content */} 
-                <div className='absolute rounded-full bg-white h-14 w-14 p-2 mt-2 mr-2' style={{right:0, cursor: 'pointer'}} onClick={openCompanyLink}>
-                    <img className="object-contain" src={logo} alt=""/>
-                </div>
-                <img className="rounded-t-lg" src={bannerImg} alt="" style={{cursor: 'pointer'}} onClick={openCompanyLink}/>{/* hover:opacity-80 */}
+            {/* Banner */}
+            {banner && (
+                <a href={job.companyLink} target='_blank' rel='noreferrer' className='block overflow-hidden'>
+                    <img src={banner} alt={job.company} className='aspect-[2/1] w-full object-cover transition-transform duration-500 hover:scale-[1.02]' style={{ objectPosition: bannerPosition }} loading='lazy' />
+                </a>
+            )}
 
-                {/* Main Work Item Text Content */} 
-                <div className="p-5">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white MontserratBoldFont">{companyName}</h5>
-                    <div className='overflow-hidden' style={{maxHeight: readMoreDivStyle }}>
-                        <div className="h-fit text-gray-700 dark:text-gray-400 MontserratRegularFont text-ellipsis">{details}</div>
-                    </div>
-                
-                    {/* Show More / Less Button*/} 
-                    <div className="flex pt-2">{/* justify-center */} 
-                        <button onClick={() => handleReadMoreClick()} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black rounded-lg bg-white MontserratBoldFont">{/* bg-gradient-to-r from-white to-[#9ca3af] */} 
-                            {readMoreButtonText}
-
-                            {/* Show More / Less Button Arrow */}
-                            {readMore ? (
-                                <AiOutlineLeft className='pl-1 text-black ' size={20}/>
-                            ) : (
-                                <AiOutlineRight className='pl-1 text-black ' size={20}/>
-                            )}
-                        </button>
+            {/* Company */}
+            <header className='flex items-start gap-4 border-b border-white/10 px-5 py-5 md:px-6'>
+                <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm'>
+                    <img src={logo} alt='' className='h-full w-full object-contain' />
+                </span>
+                <div className='min-w-0'>
+                    <h3 className='text-2xl font-semibold tracking-tight text-white'>{job.company}</h3>
+                    <div className='mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm text-zinc-400'>
+                        <a href={job.companyLink} target='_blank' rel='noreferrer' className='inline-flex items-center gap-1.5 transition-colors hover:text-white'>
+                            <FiGlobe aria-hidden="true" /> {domain(job.companyLink)}
+                        </a>
+                        <span className='inline-flex items-center gap-1.5'><FiMapPin aria-hidden="true" /> {job.location}</span>
                     </div>
                 </div>
+            </header>
+
+            {/* Roles */}
+            <div className='divide-y divide-dashed divide-white/10 px-5 md:px-6'>
+                {job.roles.map((role) => (
+                    <div key={role.title} className='py-5'>
+                        <div className='flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1'>
+                            <h4 className='flex items-center gap-2 text-lg font-semibold tracking-tight text-white'>
+                                {role.title}
+                                {role.end === 'Present' && <Tag>Current</Tag>}
+                            </h4>
+                            <span className='font-mono text-xs text-zinc-400'>{role.start} — {role.end}</span>
+                        </div>
+                        <ul className='mt-3 space-y-1.5 text-[15px] leading-relaxed text-zinc-300'>
+                            {role.highlights.map((highlight) => (
+                                <li key={highlight} className='relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-600'>
+                                    {highlight}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
             </div>
-        </div>
+
+            {/* Stack */}
+            <div className='mt-auto flex flex-wrap gap-2 border-t border-white/10 px-5 py-4 md:px-6'>
+                {job.stack.map((tech) => <Chip key={tech}>{tech}</Chip>)}
+            </div>
+        </article>
     )
 }
 

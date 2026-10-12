@@ -1,194 +1,80 @@
-import React, {useState, useEffect, useRef} from 'react'
-import { AiOutlineHome, AiOutlineCoffee, AiOutlineCodeSandbox, AiOutlineUser, AiOutlineMail } from 'react-icons/ai';
+import React, { useState, useEffect } from 'react'
+import { AiOutlineDownload } from 'react-icons/ai';
 import '../assets/css/fonts.css';
+import resume from '../assets/files/Resume.pdf';
+import { Button } from './ui';
+
+const links = [
+    { href: '#work', label: 'Work' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#resume', label: 'Resume' },
+    { href: '#contact', label: 'Contact' },
+];
 
 const Navbar = () => {
-    
-    // Mobile Navbar Button Ref
-    const mobileNavButton = useRef(null);
+    const [scrolled, setScrolled] = useState(false);
+    const [open, setOpen] = useState(false);
 
-    // Mobile Nav Transition Animation
-    const genericHamburgerLine = 'h-[2px] transition ease transform duration-300 ';
-    const [navMobileTransitionState, setNavMobileTransitionState] = useState('h-0 opacity-0 -z-50');
-
-    // Mobile Nav State Changes
-    const [nav, setNav] = useState(false);
-    const handleNav = () => {
-        if(nav) {
-            mobileNavButton.current.blur(); // removing focus
-            setNavMobileTransitionState('h-0 opacity-0 -z-50');
-
-            // Closing Nav
-            if(window.scrollY > 0) {
-                setMobileNavStyle('bg-white');
-                setMobileNavScrollStyle('bg-black');
-
-            } else {
-                setMobileNavStyle('bg-transparent');
-                setMobileNavScrollStyle('bg-black');
-            }
-        } else {
-            setNavMobileTransitionState('h-screen opacity-100');
-            setMobileNavStyle('bg-black');
-            setMobileNavScrollStyle('bg-white');
-        }
-
-        // Toggle Nav
-        setNav(!nav);
-        document.body.classList.toggle('overflow-hidden'); // Disable -- enable scroll
-    };
-
-    // Navbar Scroll State (Large)
-    const [navBarStyle, setNavBarStyle] = useState(0);
-    const [navBarTextStyle, setNavBarTextStyle] = useState('text-black');
-    const [navBarHoverStyle, setNavBarHoverStyle] = useState('from-black');
-
-    const [mobileNavStyle, setMobileNavStyle] = useState('bg-transparent');
-    const [mobileNavScrollStyle, setMobileNavScrollStyle] = useState('bg-black');
     useEffect(() => {
-        const handleScroll = (event) => {
-            if(window.scrollY > 0) {
-                setNavBarStyle('bg-white');
-                setNavBarTextStyle('text-black');
-                setNavBarHoverStyle('from-black');
-
-                setMobileNavStyle('bg-white');
-                setMobileNavScrollStyle('bg-black');
-            } else {
-                setNavBarStyle('bg-transparent');
-                setNavBarTextStyle('text-black');
-                setNavBarHoverStyle('from-black');
-
-                setMobileNavStyle('bg-transparent');
-                setMobileNavScrollStyle('bg-black');
-            }
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 0);
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Navbar Mouse Hover State (Large)
-    const [navHomeHoverStyle, setNavHomeHoverStyle] = useState('opacity-0');
-    const handleHomeHoverEnter = () => { setNavHomeHoverStyle('opacity-100'); }
-    const handleHomeHoverLeave = () => { setNavHomeHoverStyle('opacity-0'); }
-    const [navWorkHoverStyle, setNavWorkHoverStyle] = useState('opacity-0');
-    const handleWorkHoverEnter = () => { setNavWorkHoverStyle('opacity-100'); }
-    const handleWorkHoverLeave = () => { setNavWorkHoverStyle('opacity-0'); }
-    const [navProjectsHoverStyle, setNavProjectsHoverStyle] = useState('opacity-0');
-    const handleProjectsHoverEnter = () => { setNavProjectsHoverStyle('opacity-100'); }
-    const handleProjectsHoverLeave = () => { setNavProjectsHoverStyle('opacity-0'); }
-    const [navResumeHoverStyle, setNavResumeHoverStyle] = useState('opacity-0');
-    const handleResumeHoverEnter = () => { setNavResumeHoverStyle('opacity-100'); }
-    const handleResumeHoverLeave = () => { setNavResumeHoverStyle('opacity-0'); }
-    const [navContactHoverStyle, setNavContactHoverStyle] = useState('opacity-0');
-    const handleContactHoverEnter = () => { setNavContactHoverStyle('opacity-100'); }
-    const handleContactHoverLeave = () => { setNavContactHoverStyle('opacity-0'); }
+    // Lock page scroll while the mobile menu is open
+    useEffect(() => {
+        document.body.classList.toggle('overflow-hidden', open);
+    }, [open]);
 
-    // Content
+    const close = () => setOpen(false);
+
     return (
         <div>
-            {/* Mobile Navbar */}
-            <div className='md:hidden block'>
-                <div className='fixed top-4 right-4 z-[99]'>
-                    <button className='relative group' onClick={handleNav} ref={mobileNavButton}>
-                        <div className={mobileNavStyle+' relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md'}>
-                            <div className='flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden'>
-                                
-                                <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-9 rotate-45 translate-y-3 -translate-x-1" : mobileNavScrollStyle+" w-5" }`}/>
-                                <div className={`${genericHamburgerLine} ${nav ? "opacity-0" : mobileNavScrollStyle+" w-5" }`} />
-                                <div className={`${genericHamburgerLine} ${ nav ? "bg-white w-12 -rotate-45 -translate-y-3 -translate-x-3" : mobileNavScrollStyle+" w-5" }`} />
-                        
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                {/* Mobile Nav Items */}
-                <div className={'fixed w-screen duration-700 bg-white z-[98] '+navMobileTransitionState}>
-                    <div className='pt-8'>
-                        <h2 className='PermanentMarkerFont ml-10 text-4xl text-black'>Chayse</h2>
-                        <h2 className='PermanentMarkerFont ml-20 text-3xl text-black'>McMillan</h2>
-                    </div>
-
-                    {/* Mobile Nav Items*/}
-                    <div className='w-full bg-white/90 flex flex-col justify-center items-center' style={{ height: '70%' }}>
-                        <a href='#main' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
-                            <AiOutlineHome className='text-white' size={20}/>
-                            <span className='MontserratBoldFont text-white pl-4'>Home</span>
-                        </a>
-                        <a href='#work' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
-                            <AiOutlineCoffee className='text-white' size={20}/>
-                            <span className='MontserratBoldFont text-white pl-4'>Work</span>
-                        </a>
-                        <a href='#projects' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
-                            <AiOutlineCodeSandbox className='text-white' size={20}/>
-                            <span className='MontserratBoldFont text-white pl-4'>Projects</span>
-                        </a>
-                        <a href='#resume' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
-                            <AiOutlineUser className='text-white' size={20}/>
-                            <span className='MontserratBoldFont text-white pl-4'>Resume</span>
-                        </a>
-                        <a href='#contact' className='w-[75%] flex justify-center items-center rounded-full shadow-lg bg-black m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200' onClick={handleNav}>
-                            <AiOutlineMail className='text-white' size={20}/>
-                            <span className='MontserratBoldFont text-white pl-4'>Contact</span>
-                        </a>
+            {/* Navbar (Large Screen) */}
+            <nav className={'fixed inset-x-0 top-0 z-[99] hidden border-b transition-all duration-500 md:block ' + (scrolled ? 'border-white/10 bg-zinc-950/70 backdrop-blur-xl' : 'border-transparent bg-transparent')}>
+                <div className='mx-auto flex h-14 max-w-7xl items-center gap-8 px-8 2xl:max-w-[min(90vw,110rem)]'>
+                    <a href='#main' className={'PermanentMarkerFont !text-xl !text-white transition-opacity duration-500 ' + (scrolled ? 'opacity-100' : 'pointer-events-none opacity-0')}>
+                        Chayse McMillan
+                    </a>
+                    <div className='flex items-center gap-7'>
+                        {links.map((link) => (
+                            <a key={link.href} href={link.href} className={'text-[15px] font-semibold transition-colors ' + 'text-zinc-100 hover:text-white'}>{link.label}</a>
+                        ))}
                     </div>
                 </div>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <div className='fixed right-4 top-4 z-[100] md:hidden'>
+                <button
+                    onClick={() => setOpen(!open)}
+                    aria-label={open ? 'Close menu' : 'Open menu'}
+                    aria-expanded={open}
+                    className={'flex h-12 w-12 items-center justify-center rounded-full border shadow-md transition-colors ' + (open ? 'border-white/10 bg-zinc-900' : 'border-white/10 bg-zinc-950/70 backdrop-blur-xl')}
+                >
+                    <span className='relative block h-3.5 w-5'>
+                        <span className={'absolute left-0 h-[2px] w-5 bg-white transition-all duration-300 ' + (open ? 'top-1.5 rotate-45' : 'top-0')}></span>
+                        <span className={'absolute left-0 top-1.5 h-[2px] w-5 bg-white transition-opacity duration-300 ' + (open ? 'opacity-0' : 'opacity-100')}></span>
+                        <span className={'absolute left-0 h-[2px] w-5 bg-white transition-all duration-300 ' + (open ? 'top-1.5 -rotate-45' : 'top-3')}></span>
+                    </span>
+                </button>
             </div>
 
-            {/* Navbar Menu (Large Screen) */}
-            <div className='md:block hidden'>
-                <div className={'z-[99] flex justify-center px-4 py-4 fixed w-full transition-all duration-700 '+navBarStyle}>
-
-                    {/* Home */}
-                    <div onMouseEnter={() => handleHomeHoverEnter()} onMouseLeave={() => handleHomeHoverLeave()}>
-                        <a href='#main' className={'MontserratBoldFont pr-10 transition-all duration-700 '+navBarTextStyle}>Home</a>
-                        <div className={'flex transition-opacity duration-300 ease-out '+navHomeHoverStyle} style={{marginLeft:'-26px'}}>
-                            <div className={'bg-gradient-to-l '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                            <div className={'bg-gradient-to-r '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                        </div>
-                    </div>
-                    
-                    {/* Work */}
-                    <div onMouseEnter={() => handleWorkHoverEnter()} onMouseLeave={() => handleWorkHoverLeave()}>
-                        <a href='#work' className={'MontserratBoldFont pr-10 transition-all duration-700 '+navBarTextStyle}>Work</a>
-                        <div className={'flex transition-opacity duration-300 ease-out '+navWorkHoverStyle} style={{marginLeft:'-28px'}}>
-                            <div className={'bg-gradient-to-l '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                            <div className={'bg-gradient-to-r '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                        </div>
-                    </div>
-
-                    {/* Projects */}
-                    <div onMouseEnter={() => handleProjectsHoverEnter()} onMouseLeave={() => handleProjectsHoverLeave()}>
-                        <a href='#projects' className={'MontserratBoldFont pr-10 transition-all duration-700 '+navBarTextStyle}>Projects</a>
-                        <div className={'flex transition-opacity duration-300 ease-out '+navProjectsHoverStyle} style={{marginLeft:'-15px'}}>
-                            <div className={'bg-gradient-to-l '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                            <div className={'bg-gradient-to-r '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                        </div>
-                    </div>
-
-                    {/* Resume */}
-                    <div onMouseEnter={() => handleResumeHoverEnter()} onMouseLeave={() => handleResumeHoverLeave()}>
-                        <a href='#resume' className={'MontserratBoldFont pr-10 transition-all duration-700 '+navBarTextStyle}>Resume</a>
-                        <div className={'flex transition-opacity duration-300 ease-out '+navResumeHoverStyle} style={{marginLeft:'-15px'}}>
-                            <div className={'bg-gradient-to-l '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                            <div className={'bg-gradient-to-r '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                        </div>
-                    </div>
-
-                    {/* Contact */}
-                    <div onMouseEnter={() => handleContactHoverEnter()} onMouseLeave={() => handleContactHoverLeave()}>
-                        <a href='#contact' className={'MontserratBoldFont pr-10 transition-all duration-700 '+navBarTextStyle}>Contact</a>
-                        <div className={'flex transition-opacity duration-300 ease-out '+navContactHoverStyle} style={{marginLeft:'-15px'}}>
-                            <div className={'bg-gradient-to-l '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                            <div className={'bg-gradient-to-r '+navBarHoverStyle} style={{height: '1px', width: '50px'}}></div>
-                        </div>
-                    </div>
-
-
-                </div>
+            {/* Mobile Menu Sheet */}
+            <div className={'fixed inset-0 z-[99] flex flex-col bg-zinc-950 px-6 pb-8 pt-6 transition-all duration-300 md:hidden ' + (open ? 'opacity-100' : 'pointer-events-none -translate-y-2 opacity-0')}>
+                <a href='#main' onClick={close} className='PermanentMarkerFont !text-3xl !text-white'>Chayse McMillan</a>
+                <nav className='mt-10 divide-y divide-white/10 border-y border-white/10'>
+                    {links.map((link, idx) => (
+                        <a key={link.href} href={link.href} onClick={close} className='flex items-baseline gap-4 py-4'>
+                            <span className='font-mono text-xs text-zinc-500'>0{idx + 1}</span>
+                            <span className='text-2xl font-semibold tracking-tight text-white'>{link.label}</span>
+                        </a>
+                    ))}
+                </nav>
+                <Button href={resume} download="Chayse_McMillan_Resume.pdf" className='mt-auto w-full !py-3'>
+                    Download resume <AiOutlineDownload aria-hidden="true" />
+                </Button>
             </div>
         </div>
     )

@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    scroll-behavior: smooth;
+/* Smooth scrolling is handled by Lenis (see App.jsx); native smooth scrolling would fight it */
+html {
+    background-color: #09090b;
+}
+
+body {
+    @apply font-sans text-zinc-700 antialiased;
+}
+
+/* Custom scrollbar: a slim translucent pill on a dark track instead of the default chrome */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid transparent;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.22);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border-width: 3px;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox (no ::-webkit-scrollbar support) */
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
 }
